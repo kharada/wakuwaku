@@ -1,0 +1,22 @@
+{
+  "name": "wakuwaku",
+  "version": "1.0.0",
+  "description": "wakuwaku automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kharada/wakuwaku.git"
+  },
+  "author": "keiji harada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kharada/wakuwaku/issues"
+  },
+  "homepage": "https://github.com/kharada/wakuwaku#readme",
+  "dependencies": {
+    "puppeteer": "^1.20.0"
+  }
+}
