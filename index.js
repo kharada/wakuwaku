@@ -1,15 +1,16 @@
+var params = require('./parameters');
 const puppeteer = require('puppeteer');
 
 (async () => {
     // If headless is false, you can see what is going on your browser. 
-    const browser = await puppeteer.launch({headless:true});
+    const browser = await puppeteer.launch({headless:false});
     const page = await browser.newPage();
     page.setViewport({width:1200, height:800});
     let xpath;
 
     // Parameters.
-    const email = "your email";
-    const passwd = "your password";
+    const email = params.username;
+    const passwd = params.password;
     const dateYetInputClass = 'jwSCmU';
     const uncheckInputSelector = 'label.fYYSDF';
     const closeButtonSelector = 'button.MdANq';
