@@ -3,11 +3,21 @@ wakuwaku automation
 
 # Installation
 
-1. Install Node.js.
-1. Git Clone to your machine.
-1. modify index.js.(username and password)
-1. Npm installation.(npm install)
-1. Then you can Run code.(node index.js)
+1. Install Node.js
+1. Git Clone into your machine
+1. Create parameters.js see below.
+1. Npm installation(npm install)
+1. Then you can Run code(node index.js)
+
+# parameters.js
+Put parameters.js file into the directory which includes index.js
+
+```javascript
+module.exports = {
+    username : 'your username',
+    password : 'your password',
+}
+```
 
 # License
 MIT.
