@@ -2,18 +2,17 @@ var params = require('./parameters');
 const puppeteer = require('puppeteer');
 
 (async () => {
-    // If headless is false, you can see what is going on your browser. 
+    // If headless is false, you can see what is going on your browser.
     const browser = await puppeteer.launch({headless:true});
     const page = await browser.newPage();
     page.setViewport({width:1200, height:800});
-    let xpath;ß
 
     // Parameters.
     const email = params.username;
     const passwd = params.password;
-    const dateYetInputClass = 'kGhEkq';
-    const uncheckInputSelector = 'label.cPGvco';
-    const closeButtonSelector = 'button.bvyIdv';
+    const dateYetInputClass = 'hpBiPN';
+    const uncheckInputSelector = 'label.kLvWbN';
+    const closeButtonSelector = 'button.hgdJxW';
 
     // Date and Dummy Steps.
     let targetDate = new Date().getDate();
@@ -23,24 +22,24 @@ const puppeteer = require('puppeteer');
 
         // Open pepup.
         await page.goto('https://pepup.life/users/sign_in');
-  
+
         // Here is Login page.
         await page.type('#sender-email', email);
         await page.type('#user-pass', passwd);
         await page.click('input[type="submit"]');
-    
+
         // Here is Top page.
         xpath = `//div[contains(text(), '健康わくわくマイレージの入力はこちらから')]`;
         await page.waitForXPath(xpath);
         await (await page.$x(xpath))[0].click();
-    
+
         // Go to the next page.
         xpath = `//a[contains(text(), '▶2019年度わくわくマイレージ')]`;
         await page.waitForXPath(xpath);
         await (await page.$x(xpath))[0].click();
-        
+
         // Here is daily input page.
-    
+
         // Life style (Oral care)
         xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
         await page.waitForXPath(xpath);
@@ -48,7 +47,7 @@ const puppeteer = require('puppeteer');
         await page.waitForSelector(uncheckInputSelector);
         await page.click(uncheckInputSelector);
         await page.click(closeButtonSelector);
-        
+
         // Life style (Other Food)
         xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
         await page.waitForXPath(xpath);
@@ -59,7 +58,7 @@ const puppeteer = require('puppeteer');
             await label.click();
         }
         await page.click(closeButtonSelector);
-    
+
         // Life style (Drink Alchole?)
         xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
         await page.waitForXPath(xpath);
@@ -67,7 +66,7 @@ const puppeteer = require('puppeteer');
         await page.waitForSelector(uncheckInputSelector);
         await page.click(uncheckInputSelector);
         await page.click(closeButtonSelector);
-    
+
         // Sleeping custom.
         xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
         await page.waitForXPath(xpath);
@@ -75,7 +74,7 @@ const puppeteer = require('puppeteer');
         await page.waitForSelector(uncheckInputSelector);
         await page.click(uncheckInputSelector);
         await page.click(closeButtonSelector);
-    
+
         // Sleeping time.
         xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
         await page.waitForXPath(xpath);
@@ -85,7 +84,7 @@ const puppeteer = require('puppeteer');
         await page.type('input[name="vitalInput"]', '7');
         await page.click('button[type="submit"]');
         await page.waitFor(3000);
-    
+
         // Step count.
         xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
         await page.waitForXPath(xpath);
@@ -95,7 +94,7 @@ const puppeteer = require('puppeteer');
         await page.type('input[name="vitalInput"]', steps + '');
         await page.click('button[type="submit"]');
         await page.waitFor(3000);
-    
+
         // Click the other checkboxes.
         xpath = `//span[contains(text(), '日々の記録')]`;
         await page.waitForXPath(xpath);
@@ -106,7 +105,7 @@ const puppeteer = require('puppeteer');
         for(const item of otherLabels){
             await item.click();
         }
-     
+
     } catch (error) {
         console.error(error);
     } finally {
@@ -114,4 +113,3 @@ const puppeteer = require('puppeteer');
         await browser.close();
     }
   })();
-
