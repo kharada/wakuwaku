@@ -109,6 +109,8 @@ const puppeteer = require('puppeteer');
             await item.click();
         }
 
+        console.log('Successfully completed');
+
     } catch (error) {
         console.error(error);
     } finally {
