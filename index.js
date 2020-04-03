@@ -37,7 +37,7 @@ const puppeteer = require('puppeteer');
         await (await page.$x(xpath))[0].click();
 
         // Go to the next page.
-        xpath = `//a[contains(text(), '▶2019年度わくわくマイレージ')]`;
+        xpath = `//a[contains(text(), '▶健康わくわくマイレージ')]`;
         await page.waitForXPath(xpath);
         await (await page.$x(xpath))[0].click();
 
