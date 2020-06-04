@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
     // If headless is false, you can see what is going on your browser.
     const browser = await puppeteer.launch({
         executablePath : params.executablePath,
-        headless:true
+        headless:false
     });
     const page = await browser.newPage();
     page.setViewport({width:1200, height:800});
@@ -42,6 +42,14 @@ const puppeteer = require('puppeteer');
         await (await page.$x(xpath))[0].click();
 
         // Here is daily input page.
+
+        // Oral care
+        xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+        await page.waitForXPath(xpath);
+        await (await page.$x(xpath))[5].click();
+        await page.waitForSelector(uncheckInputSelector);
+        await page.click(uncheckInputSelector);
+        await page.click(closeButtonSelector);
 
         // Life style (Other Food)
         xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
