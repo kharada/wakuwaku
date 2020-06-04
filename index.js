@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
     // If headless is false, you can see what is going on your browser.
     const browser = await puppeteer.launch({
         executablePath : params.executablePath,
-        headless:false
+        headless:true
     });
     const page = await browser.newPage();
     page.setViewport({width:1200, height:800});
