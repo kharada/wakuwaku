@@ -43,6 +43,14 @@ const puppeteer = require('puppeteer');
 
         // Here is daily input page.
 
+        // Life style (Plus 10, August)
+        xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+        await page.waitForXPath(xpath);
+        await (await page.$x(xpath))[5].click();
+        await page.waitForSelector(uncheckInputSelector);
+        await page.click(uncheckInputSelector);
+        await page.click(closeButtonSelector);
+        
         // Life style (Other Food)
         xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
         await page.waitForXPath(xpath);
