@@ -13,9 +13,9 @@ const puppeteer = require('puppeteer');
     // Parameters.
     const email = params.username;
     const passwd = params.password;
-    const dateYetInputClass = 'hpBiPN';
-    const uncheckInputSelector = 'label.kLvWbN';
-    const closeButtonSelector = 'button.hgdJxW';
+    const dateYetInputClass = 'bpilVq';
+    const uncheckInputSelector = 'label.jnIMse';
+    const closeButtonSelector = 'button.leagUd';
 
     // Date and Dummy Steps.
     let targetDate = new Date().getDate();
