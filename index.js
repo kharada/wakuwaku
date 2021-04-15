@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
     // If headless is false, you can see what is going on your browser.
     const browser = await puppeteer.launch({
         executablePath : params.executablePath,
-        headless:true
+        headless:false
     });
     const page = await browser.newPage();
     page.setViewport({width:1200, height:800});
@@ -13,9 +13,9 @@ const puppeteer = require('puppeteer');
     // Parameters.
     const email = params.username;
     const passwd = params.password;
-    const dateYetInputClass = 'jZAaAL';
-    const uncheckInputSelector = 'label.kmktFr';
-    const closeButtonSelector = 'button.eYNZaQ';
+    const dateYetInputClass = 'kEmltJ';
+    const uncheckInputSelector = 'label.ddESTR';
+    const closeButtonSelector = 'button.dUTZMW';
 
     // Date and Dummy Steps.
     let targetDate = new Date().getDate();
