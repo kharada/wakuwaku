@@ -19,7 +19,7 @@ const puppeteer = require('puppeteer');
 
     // Date and Dummy Steps.
     let targetDate = new Date().getDate();
-    let steps = 8000 + Math.floor(1000 * Math.random());
+    let steps = 10000 + Math.floor(1000 * Math.random());
 
     try {
 
