@@ -88,6 +88,7 @@ const puppeteer = require('puppeteer');
         xpath = `//span[contains(text(), '日々の記録')]`;
         await page.waitForXPath(xpath);
         await (await page.$x(xpath))[0].click();
+        await page.waitFor(3000);
         xpath = `//input[not (@checked) and @type = 'checkbox']/..`;
         await page.waitForXPath(xpath);
         const otherLabels =  await page.$x(xpath);
