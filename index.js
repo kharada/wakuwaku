@@ -32,6 +32,7 @@ const puppeteer = require('puppeteer');
         await page.click('input[type="submit"]');
 
         // Here is Top page.
+        await page.waitFor(3000); // wait for login completed.
         await page.goto('https://pepup.life/scsk_mileage_campaigns');
         await page.waitFor(1000);
 
