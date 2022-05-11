@@ -116,7 +116,7 @@ const puppeteer = require('puppeteer');
         for(let targetDate of targetDates){
             let date = "/daily_records/diary/" + year + "/" + month + "/" + targetDate;
             // daily records.
-            xpath = `//a[contains(., '` + targetDate + `') and contains(@href,'` + date  + `')]`;
+            xpath = `//a[contains(@href,'` + date  + `')]`;
             await page.waitForXPath(xpath);
             await (await page.$x(xpath))[0].click();
             await page.waitFor(3000);
