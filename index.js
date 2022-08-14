@@ -32,10 +32,13 @@ const puppeteer = require('puppeteer');
         await page.click('input[type="submit"]');
 
         // Here is Top page.
+        xpath = `//a[href="/association_announcements"]`;
+        await page.waitForXPath(xpath);
+        await (await page.$x(xpath))[0].click();
+        // Here is Top page.
         xpath = `//div[contains(text(), '健康わくわくマイレージの入力はこちらから')]`;
         await page.waitForXPath(xpath);
         await (await page.$x(xpath))[0].click();
-
         // Go to the next page.
         xpath = `//a[contains(text(), '▶健康わくわくマイレージ')]`;
         await page.waitForXPath(xpath);
