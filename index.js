@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
     // If headless is false, you can see what is going on your browser.
     const browser = await puppeteer.launch({
         executablePath : params.executablePath,
-        headless: false
+        headless: true
     });
     const page = await browser.newPage();
     page.setViewport({width:1200, height:800});
@@ -13,9 +13,9 @@ const puppeteer = require('puppeteer');
     // Parameters.
     const email = params.username;
     const passwd = params.password;
-    const dateYetInputClass = 'gUiFam';
-    const uncheckInputSelector = 'label.hsWtPO';
-    const closeButtonSelector = 'button.ldPZoQ';
+    const dateYetInputClass = 'gYFUuH';
+    const uncheckInputSelector = 'label.ccnfVb';
+    const closeButtonSelector = 'button.Fvjnp';
     const periodDays = 7;
 
     // Date
@@ -39,7 +39,6 @@ const puppeteer = require('puppeteer');
         // Here is Login page.
         await page.type('#sender-email', email);
         await page.type('#user-pass', passwd);
-        await page.waitFor(30000); // waiting for input reCAPTCHA by user.
         await page.click('input[type="submit"]');
 
         // Here is Top page.
