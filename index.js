@@ -13,9 +13,9 @@ const puppeteer = require('puppeteer');
     // Parameters.
     const email = params.username;
     const passwd = params.password;
-    const dateYetInputClass = 'cXGsbj';
-    const uncheckInputSelector = 'label.hnvLZL';
-    const closeButtonSelector = 'button.kZFuyV';
+    const dateYetInputClass = 'fcYZhP';
+    const uncheckInputSelector = 'label.iPfGsH';
+    const closeButtonSelector = 'button.gSBSkp';
     const periodDays = 7;
 
     // Date
