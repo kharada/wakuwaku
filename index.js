@@ -13,9 +13,9 @@ const puppeteer = require('puppeteer');
     // Parameters.
     const email = params.username;
     const passwd = params.password;
-    const dateYetInputClass = 'fsfggI';
-    const uncheckInputSelector = 'label.hTHxwd';
-    const closeButtonSelector = 'button.bSzVrQ';
+    const dateYetInputClass = 'bzosaj';
+    const uncheckInputSelector = 'label.jqzAVb';
+    const closeButtonSelector = 'button.gCgkeD';
     const periodDays = 7;
 
     // Date
@@ -51,6 +51,22 @@ const puppeteer = require('puppeteer');
             let steps = 10000 + Math.floor(1000 * Math.random());
 
             // Here is daily input page.
+            // Life style (Be clean)
+            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForXPath(xpath);
+            await (await page.$x(xpath))[6].click();
+            await page.waitForSelector(uncheckInputSelector);
+            await page.click(uncheckInputSelector);
+            await page.click(closeButtonSelector);
+            
+            // Life style (Drink Alchole)
+            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForXPath(xpath);
+            await (await page.$x(xpath))[5].click();
+            await page.waitForSelector(uncheckInputSelector);
+            await page.click(uncheckInputSelector);
+            await page.click(closeButtonSelector);
+            
             // Life style (Other Food)
             xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
             await page.waitForXPath(xpath);
@@ -62,7 +78,7 @@ const puppeteer = require('puppeteer');
             }
             await page.click(closeButtonSelector);
 
-            // Life style (Drink Alchole?)
+            // Life style (Breakfast)
             xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
             await page.waitForXPath(xpath);
             await (await page.$x(xpath))[3].click();
@@ -101,9 +117,7 @@ const puppeteer = require('puppeteer');
         }
 
         // Click the other checkboxes.
-        xpath = `//span[contains(text(), '日々の記録')]`;
-        await page.waitForXPath(xpath);
-        await (await page.$x(xpath))[0].click();
+        await page.goto('https://pepup.life/daily_records/diary');
         await page.waitFor(3000);
 
         for(let targetDate of targetDates){
