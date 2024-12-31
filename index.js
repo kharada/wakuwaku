@@ -17,12 +17,15 @@ const puppeteer = require('puppeteer');
     const uncheckInputSelector = 'label.kZHBwN';
     const closeButtonSelector = 'button.faiZni';
     const periodDays = 7;
+    const startDate = '';
+    // const startDate = '2024-12-22T10:00'; // use if input for past dates.
 
     // Date
     let targetDates = [];
-    let date = new Date();
+    let date = startDate == '' ? new Date() : new Date(startDate);
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
+    let day = date.getDate();
     for(let index = 0; index < periodDays; index++ ){
         targetDates.push(date.getDate());
         if(date.getDate() === 1){
@@ -117,7 +120,7 @@ const puppeteer = require('puppeteer');
         }
 
         // Click the other checkboxes.
-        await page.goto('https://pepup.life/daily_records/diary');
+        await page.goto('https://pepup.life/daily_records/diary/' + year + '/' + month + '/' + day);
         await page.waitFor(3000);
 
         for(let targetDate of targetDates){
