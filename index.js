@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
     // If headless is false, you can see what is going on your browser.
     const browser = await puppeteer.launch({
         executablePath : params.executablePath,
-        headless: true
+        headless: false
     });
     const page = await browser.newPage();
     page.setViewport({width:1200, height:800});
@@ -18,7 +18,7 @@ const puppeteer = require('puppeteer');
     const closeButtonSelector = 'button.faiZni';
     const periodDays = 7;
     const startDate = '';
-    // const startDate = '2024-12-22T10:00'; // use if input for past dates.
+    // const startDate = '2025-07-16T10:00'; // use if input for past dates.
 
     // Date
     let targetDates = [];
@@ -42,7 +42,10 @@ const puppeteer = require('puppeteer');
         // Here is Login page.
         await page.type('#sender-email', email);
         await page.type('#user-pass', passwd);
+        await page.waitFor(10000); // Click reCAPTCHA manually.
         await page.click('input[type="submit"]');
+
+        // Type Auth Code manually.
 
         // Here is Top page.
         await page.waitForSelector('a[href="/scsk_mileage_campaigns"]');
