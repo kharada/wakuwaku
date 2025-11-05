@@ -18,7 +18,11 @@ const puppeteer = require('puppeteer');
     const closeButtonSelector = 'button.faiZni';
     const periodDays = 7;
     const startDate = '';
-    // const startDate = '2025-07-16T10:00'; // use if input for past dates.
+    // const startDate = '2025-09-30T10:00'; // use if input for past dates.
+    const sleep = milliseconds =>
+    new Promise(resolve =>
+        setTimeout(resolve, milliseconds)
+    );
 
     // Date
     let targetDates = [];
@@ -42,9 +46,10 @@ const puppeteer = require('puppeteer');
         // Here is Login page.
         await page.type('#sender-email', email);
         await page.type('#user-pass', passwd);
-        await page.waitFor(10000); // Click reCAPTCHA manually.
-        await page.click('input[type="submit"]');
-
+        await page.click('label.checkbox'); // retain login state.
+        
+        // Click reCAPTCHA manually.
+        // Click login manually.
         // Type Auth Code manually.
 
         // Here is Top page.
@@ -58,25 +63,25 @@ const puppeteer = require('puppeteer');
 
             // Here is daily input page.
             // Life style (Be clean)
-            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
-            await page.waitForXPath(xpath);
-            await (await page.$x(xpath))[6].click();
+            xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForSelector(xpath);
+            await (await page.$$(xpath))[6].click();
             await page.waitForSelector(uncheckInputSelector);
             await page.click(uncheckInputSelector);
             await page.click(closeButtonSelector);
             
             // Life style (Drink Alchole)
-            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
-            await page.waitForXPath(xpath);
-            await (await page.$x(xpath))[5].click();
+            xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForSelector(xpath);
+            await (await page.$$(xpath))[5].click();
             await page.waitForSelector(uncheckInputSelector);
             await page.click(uncheckInputSelector);
             await page.click(closeButtonSelector);
             
             // Life style (Other Food)
-            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
-            await page.waitForXPath(xpath);
-            await (await page.$x(xpath))[4].click();
+            xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForSelector(xpath);
+            await (await page.$$(xpath))[4].click();
             await page.waitForSelector(uncheckInputSelector);
             const labels = await page.$$(uncheckInputSelector);
             for(const label of labels){
@@ -85,60 +90,60 @@ const puppeteer = require('puppeteer');
             await page.click(closeButtonSelector);
 
             // Life style (Breakfast)
-            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
-            await page.waitForXPath(xpath);
-            await (await page.$x(xpath))[3].click();
+            xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForSelector(xpath);
+            await (await page.$$(xpath))[3].click();
             await page.waitForSelector(uncheckInputSelector);
             await page.click(uncheckInputSelector);
             await page.click(closeButtonSelector);
 
             // Sleeping custom.
-            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
-            await page.waitForXPath(xpath);
-            await (await page.$x(xpath))[2].click();
+            xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForSelector(xpath);
+            await (await page.$$(xpath))[2].click();
             await page.waitForSelector(uncheckInputSelector);
             await page.click(uncheckInputSelector);
             await page.click(closeButtonSelector);
 
             // Sleeping time.
-            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
-            await page.waitForXPath(xpath);
-            await (await page.$x(xpath))[1].click();
+            xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForSelector(xpath);
+            await (await page.$$(xpath))[1].click();
             await page.waitForSelector('input[name="vitalInput"]');
             await page.click('input[name="vitalInput"]');
             await page.type('input[name="vitalInput"]', '7');
             await page.click('button[type="submit"]');
-            await page.waitFor(3000);
+            await sleep(3000);
 
             // Step count.
-            xpath = `//button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
-            await page.waitForXPath(xpath);
-            await (await page.$x(xpath))[0].click();
+            xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
+            await page.waitForSelector(xpath);
+            await (await page.$$(xpath))[0].click();
             await page.waitForSelector('input[name="vitalInput"]');
             await page.click('input[name="vitalInput"]');
             await page.type('input[name="vitalInput"]', steps + '');
             await page.click('button[type="submit"]');
-            await page.waitFor(3000);
+            await sleep(3000);
 
         }
 
         // Click the other checkboxes.
         await page.goto('https://pepup.life/daily_records/diary/' + year + '/' + month + '/' + day);
-        await page.waitFor(3000);
+        await sleep(3000);
 
         for(let targetDate of targetDates){
             let date = "/daily_records/diary/" + year + "/" + month + "/" + targetDate;
             // daily records.
-            xpath = `//a[contains(@href,'` + date  + `')]`;
-            await page.waitForXPath(xpath);
-            await (await page.$x(xpath))[0].click();
-            await page.waitFor(3000);
+            xpath = `xpath///a[contains(@href,'` + date  + `')]`;
+            await page.waitForSelector(xpath);
+            await (await page.$$(xpath))[0].click();
+            await sleep(3000);
 
-            xpath = `//input[not (@checked) and @type = 'checkbox']/..`;
-            const otherLabels =  await page.$x(xpath);
+            xpath = `xpath///input[not (@checked) and @type = 'checkbox']/..`;
+            const otherLabels =  await page.$$(xpath);
             for(const item of otherLabels){
                 await item.click();
-                await page.waitFor(100);
+                await sleep(100);
             }
         }        
 
