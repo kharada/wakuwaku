@@ -53,7 +53,7 @@ const puppeteer = require('puppeteer');
         // Type Auth Code manually.
 
         // Here is Top page.
-        await page.waitForSelector('a[href="/scsk_mileage_campaigns"]');
+        await page.waitForSelector('a[href="/scsk_mileage_campaigns"]', {timeout: 60000});
         await page.click('a[href="/scsk_mileage_campaigns"]');
 
         for(let targetDate of targetDates){
