@@ -13,9 +13,9 @@ const puppeteer = require('puppeteer');
     // Parameters.
     const email = params.username;
     const passwd = params.password;
-    const dateYetInputClass = 'eEbFHs';
-    const uncheckInputSelector = 'label.kZHBwN';
-    const closeButtonSelector = 'button.faiZni';
+    const dateYetInputClass = 'ilDsJm';
+    const uncheckInputSelector = 'label.fLMvRp';
+    const closeButtonSelector = 'button.CBvPP';
     const periodDays = 7;
     const startDate = '';
     // const startDate = '2025-09-30T10:00'; // use if input for past dates.
