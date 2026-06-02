@@ -18,7 +18,7 @@ const puppeteer = require('puppeteer');
     const closeButtonSelector = 'button.CBvPP';
     const periodDays = 7;
     const startDate = '';
-    // const startDate = '2025-09-30T10:00'; // use if input for past dates.
+    // const startDate = '2026-05-31T10:00'; // use if input for past dates.
     const sleep = milliseconds =>
     new Promise(resolve =>
         setTimeout(resolve, milliseconds)
@@ -46,7 +46,7 @@ const puppeteer = require('puppeteer');
         // Here is Login page.
         await page.type('#sender-email', email);
         await page.type('#user-pass', passwd);
-        await page.click('label.checkbox'); // retain login state.
+        await page.click('input[type="checkbox"]'); // retain login state.
         
         // Click reCAPTCHA manually.
         // Click login manually.
@@ -78,17 +78,14 @@ const puppeteer = require('puppeteer');
             await page.click(uncheckInputSelector);
             await page.click(closeButtonSelector);
             
-            // Life style (Other Food)
+            // Life style (Say thank you)
             xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
             await page.waitForSelector(xpath);
             await (await page.$$(xpath))[4].click();
             await page.waitForSelector(uncheckInputSelector);
-            const labels = await page.$$(uncheckInputSelector);
-            for(const label of labels){
-                await label.click();
-            }
+            await page.click(uncheckInputSelector);
             await page.click(closeButtonSelector);
-
+            
             // Life style (Breakfast)
             xpath = `xpath///button[contains(., '` + targetDate + `') and contains(@class,'` + dateYetInputClass + `')]`;
             await page.waitForSelector(xpath);
