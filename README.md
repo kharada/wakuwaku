@@ -1,39 +1,50 @@
-# wakuwaku
-wakuwaku automation
+# Pep Up わくわくマイレージ CSV 一括入力
 
-# Installation
+CSVに記録した日付をもとに、Pep Up「わくわくマイレージ 一括入力」へ1日ずつ入力するPythonスクリプトです。
 
-1. Install Node.js
-1. Git Clone into your machine
-1. Create parameters.js see below. (If you wanted running on Raspberry pi, see Notes)
-1. Npm installation(npm install)
-1. Then you can Run code(node index.js)
+## 準備
 
-# parameters.js
-Put parameters.js file into the directory which includes index.js
+Pythonをインストールしたうえで、PlaywrightとChromiumを準備します。
 
-```javascript
-module.exports = {
-    username : 'your username',
-    password : 'your password',
-    executablePath : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', // Depends on your environment [MacOS].
-    // executablePath : '/usr/bin/chromium-browser', // Depends on your environment [like Raspberry Pi].
-}
+```sh
+pip install playwright
+playwright install chromium
 ```
 
-# Note
-## Running on Raspberry pi
-1. Install chromium-browser. ```sudo apt-get install chromium-browser``` 
-1. Remove node_modules directory if existed.
-1. Uncomment parameters.js executablePath. (also comment out MacOS version.)
-1. Modify package.json puppeteer version to right one. (Check ```chromium-browser --version``` and see [Puppeteer Site](https://pptr.dev/)'s top left version link)
-1. ```PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install``` instead of ```npm install```
+## 使い方
 
-# License
-MIT.
+CSVの記録を入力して送信する場合:
 
-# Why I made it?
-Daily input to wakuwaku is meaningless for me. (It is NOT exciting.)
-So I made.
+```sh
+python pepup_csv_input.py records.csv
+```
 
-If our company present fitbit for all employees, then I delete this repository.
+送信せず入力内容を確認する場合:
+
+```sh
+python pepup_csv_input.py records.csv --dry-run
+```
+
+スクリプトを起動するとブラウザが開きます。Pep Upに手動でログインし、ターミナルでEnterを押すと処理が始まります。各日付の入力・送信結果はターミナルに表示されます。処理が終わったら、Enterを押してブラウザを閉じてください。
+
+## CSV形式
+
+UTF-8形式で保存し、1行目を見出しにします。`date`列に`YYYY-MM-DD`形式の日付を指定してください。
+
+```csv
+date
+2026-10-03
+2026-10-02
+```
+
+`records_template.csv`を入力用CSVの例として利用できます。実際の記録を入れた`records.csv`は`.gitignore`に登録されており、ソース管理の対象外です。
+
+## ライセンス
+
+MIT
+
+## なぜこのスクリプトを作ったのか
+
+日次の入力項目を増やし、従業員の作業時間を奪おうとする人やシステムのことを、私は「時間泥棒」とみなしています。
+時間泥棒への対抗処置としてこのスクリプトを作っています。
+従業員の時間を奪わないよう、自動連携するデバイスが全社員に配布されたときに、このスクリプト及びリポジトリを削除します。
